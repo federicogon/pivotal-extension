@@ -1,0 +1,14 @@
+{
+  "name": "Pivotal Extension",
+  "version": "1.0",
+  "description": "Add a button to copy the ID and the name of a task. [#<id>] <name>",
+  "permissions": ["activeTab", "storage"],
+  "content_scripts": [
+    {
+      "matches": ["https://www.pivotaltracker.com/n/projects/*"],
+      "run_at": "document_idle",
+      "js": ["addCopyNameButton.js"]
+    }
+  ],
+  "manifest_version": 2
+}
