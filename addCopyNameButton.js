@@ -1,28 +1,31 @@
 'use strict';
+console.log('== INIT Pivotal extension.');
 
 function addCopyButtons() {
     let actions = document.querySelectorAll('.edit .model_details div.actions');
     if (actions.length) {
         actions.forEach((container) => {
+            if (container.querySelector('.copy_id_name_button')) return;
             container.parentElement.style.width = '320px';
             let newBtn = document.createElement("button");
             newBtn.type = 'button';
             newBtn.textContent = 'Cp';
             newBtn.classList.add('clipboard_button');
             newBtn.classList.add('hoverable');
-            newBtn.classList.add('use_click_to_copy');
-            newBtn.classList.add('autosaves');
+            newBtn.classList.add('left_endcap');
+            newBtn.classList.add('copy_id_name_button');
 
             let id = container.querySelector('input.id.text_value').value;
             if (id) {
                 id = id.replace('#', '');
                 let titleTextarea = container.closest('.story_' + id).querySelector('textarea');
                 let name = (titleTextarea) ? titleTextarea.value : 'Name Not Found';
-                newBtn.dataset.clipboardText = `[#${id}] ${name}`;
+                let clipboard = `[#${id}] ${name}`;
+                newBtn.dataset.clipboardText = clipboard;
                 newBtn.onclick = () => {
-                    console.log('=== Copied: ' + name);
+                    console.log('=== Copied: ' + clipboard);
                 };
-                container.insertAdjacentElement('beforeend', newBtn);
+                container.insertAdjacentElement('afterbegin', newBtn);
             }
         });
     }
