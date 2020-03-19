@@ -31,9 +31,12 @@ function addCopyButtons() {
     }
 }
 
-let container = document.getElementsByClassName('panels');
 document.addEventListener('click', function (e) {
-    if (e.target.classList.contains('expander')) {
+    if ((e.target.tagName === 'SPAN' && e.target.classList.contains('labels')) ||
+        (e.target.tagName === 'SPAN' && e.target.classList.contains('tracker_markup')) ||
+        (e.target.tagName === 'SPAN' && e.target.classList.contains('story_name')) ||
+        (e.target.tagName === 'HEADER' && e.target.classList.contains('preview'))
+    ) {
         setTimeout(addCopyButtons, 500);
     }
 }, false);
